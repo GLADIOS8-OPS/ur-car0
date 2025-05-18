@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Araba Kiralama</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+    header { background: #222; color: white; padding: 1rem; text-align: center; }
+    nav { background: #444; padding: 1rem; text-align: center; }
+    nav a { color: white; margin: 0 1rem; text-decoration: none; }
+    section { padding: 2rem; }
+    h2 { color: #333; }
+    .kategori { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
+    .araba { background: white; padding: 1rem; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .araba img { width: 100%; border-radius: 8px; }
+    footer { background: #222; color: white; text-align: center; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Online Araba Kiralama</h1>
+  </header>
+  <nav>
+    <a href="#elektrikli">Elektrikli</a>
+    <a href="#spor">Spor</a>
+    <a href="#station">Station Wagon</a>
+    <a href="#ucret">Ücretlendirme</a>
+    <a href="#sartlar">Kiralama Şartları</a>
+    <a href="#sigorta">Sigorta</a>
+  </nav>
+
+  <section id="elektrikli">
+    <h2>Elektrikli Arabalar</h2>
+    <div class="kategori">
+      <div class="araba">
+        <img src="https://via.placeholder.com/300x180" alt="Elektrikli Model 1">
+        <h3>Tesla Model 3</h3>
+        <p>Günlük: 1500 TL</p>
+      </div>
+      <div class="araba">
+        <img src="https://via.placeholder.com/300x180" alt="Elektrikli Model 2">
+        <h3>Renault Zoe</h3>
+        <p>Günlük: 1000 TL</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="spor">
+    <h2>Spor Arabalar</h2>
+    <div class="kategori">
+      <div class="araba">
+        <img src="https://via.placeholder.com/300x180" alt="Spor Model 1">
+        <h3>Porsche 911</h3>
+        <p>Günlük: 5000 TL</p>
+      </div>
+      <div class="araba">
+        <img src="https://via.placeholder.com/300x180" alt="Spor Model 2">
+        <h3>Ford Mustang</h3>
+        <p>Günlük: 4000 TL</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="station">
+    <h2>Station Wagon Arabalar</h2>
+    <div class="kategori">
+      <div class="araba">
+        <img src="https://via.placeholder.com/300x180" alt="Station Model 1">
+        <h3>Volkswagen Passat Variant</h3>
+        <p>Günlük: 2000 TL</p>
+      </div>
+      <div class="araba">
+        <img src="https://via.placeholder.com/300x180" alt="Station Model 2">
+        <h3>Volvo V60</h3>
+        <p>Günlük: 2200 TL</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ucret">
+    <h2>Ücretlendirme</h2>
+    <p>Tüm fiyatlar günlük kira bedelidir ve KDV dahildir.</p>
+    <ul>
+      <li>1-3 gün: Standart ücret</li>
+      <li>4-7 gün: %10 indirim</li>
+      <li>8+ gün: %20 indirim</li>
+    </ul>
+  </section>
+
+  <section id="sartlar">
+    <h2>Kiralama Şartları</h2>
+    <ul>
+      <li>En az 2 yıllık geçerli ehliyet</li>
+      <li>21 yaşından büyük olmak</li>
+      <li>Kredi kartı ile ödeme zorunluluğu</li>
+    </ul>
+  </section>
+
+  <section id="sigorta">
+    <h2>Sigorta Paketleri</h2>
+    <ul>
+      <li><strong>Standart Paket:</strong> Temel kasko dahildir</li>
+      <li><strong>Genişletilmiş Paket:</strong> Mini onarım ve cam hasarı dahil</li>
+      <li><strong>Full Paket:</strong> Her türlü hasara karşı koruma sağlar</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Online Araba Kiralama</p>
+  </footer>
+</body>
+</html>
