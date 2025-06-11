@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-CAR | Yardım&SSS</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --primary: #003366;
+      --dark: #333;
+      --light: #fff;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      background: var(--light);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    nav button {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #0072d6;
+    }
+    
+            .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            color: rgb(0, 0, 0);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            color: rgba(0, 0, 0, 0.9);
+            font-size: 1.2rem;
+        }
+
+        .search-box {
+            background: white;
+            display: grid;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+        }
+
+        .content-grid {
+            width: 100%;
+            padding: 15px;
+            border: 0.1px solid #e0e0e0;
+            display: grid;
+            grid-template-columns: 1fr 0.000000001fr; 
+            border-radius: 10px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .sidebar {
+           display: list-item;
+           flex-direction: column;
+           gap: 2rem;
+           padding: 2rem;
+           max-width: 100px;
+           margin: 0 auto;
+        }
+
+        .quick-help, .contact-info {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background: #f8f9fa;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #01156c 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .faq-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            
+        }
+
+        .faq-question {
+            background: #f8f9fa;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-icon.rotate {
+            transform: rotate(180deg);
+        }
+
+        .help-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .help-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .help-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: #e9ecef;
+        }
+
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            background: #0f007d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #001055 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(1, 11, 121, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .category-tabs {
+                justify-content: center;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+ 
+    .car-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .car {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .car:hover {
+      transform: translateY(-5px);
+    }
+
+    .car img {
+      width: 100%;
+      height: 50%;
+      object-fit: cover;
+    }
+
+    .car-info {
+      padding: 1rem;
+    }
+
+    .car-info h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .car-info p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .car-info a {
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .car-info a:hover {
+      background: #0072d6;
+    }
+
+    .lang-tr, .lang-en, .lang-fr {
+      display: none;
+    }
+
+    .visible {
+      display: block;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Price Container Styles */
+    .price-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background-color: #f0f8ff;
+      margin-top: 2rem;
+    }
+
+    .price-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .price-card h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-amount {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0072d6;
+      margin-bottom: 1rem;
+    }
+
+    .price-period {
+      display: block;
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .price-features li {
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-size: larger;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-style: italic;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .price-features li::before {
+      content: "✓";
+      color: #0072d6;
+      position: absolute;
+      left: 0;
+    }
+
+    .price-features li.hidden-protection {
+      color: white;
+      visibility: hidden;
+    }
+
+    .price-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .price-button:hover {
+      background-color: #0072d6;
+    }
+
+    /* Footer Navigation Styles */
+    .footer-nav {
+      background: white;
+      padding: 3rem 2rem;
+      border-top: 3px solid var(--primary);
+    }
+
+    .footer-nav-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-nav-section {
+      text-align: left;
+    }
+
+    .footer-nav-section h3 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .footer-nav-section ul {
+      list-style: none;
+    }
+
+    .footer-nav-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-nav-section ul li a {
+      color: var(--dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-nav-section ul li a:hover {
+      color: #0072d6;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .footer-nav-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-nav-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="lang-tr visible">UR-CAR</h1>
+    <h1 class="lang-en">UR-CAR</h1>
+    <h1 class="lang-fr">UR-CAR</h1>
+    <p class="lang-tr visible">En İyisi ve En Özeli</p>
+    <p class="lang-en">Best & Special</p>
+    <p class="lang-fr">Le Meilleur et le Plus Spécial</p>
+  </header>
+
+  <nav>
+    <button onclick="switchLanguage('tr')">Türkçe</button>
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('fr')">Français</button>
+  </nav>
+
+  <div class="container">
+    <div class="header">
+      <h1> Sıkça Sorulan Sorular</h1>
+      <p>Daima Sizin İçin En İyisi</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" class="search-input" placeholder="🔍 Sorularınıza en iyi cevaplar.." id="searchInput">
+    </div>
+
+    <div class="content-grid">
+      <div class="faq-section">
+        <div class="category-tabs">
+          <button class="tab-btn active" data-category="all">Tümü</button>
+          <button class="tab-btn" data-category="rezervasyon">Rezervasyon</button>
+          <button class="tab-btn" data-category="odeme">Ödeme</button>
+          <button class="tab-btn" data-category="teslim">Teslim & İade</button>
+          <button class="tab-btn" data-category="sigorta">Sigorta</button>
+          <button class="tab-btn" data-category="genel">Genel</button>
+        </div>
+
+        <div id="faqContainer">
+          <div class="faq-item" data-category="rezervasyon">
+            <div class="faq-question">
+              <span>Nasıl rezervasyon yapabilirim?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>Rezervasyon yapmak çok kolay:</p>
+              <ol>
+                <li>Ana sayfada tarih ve lokasyon seçin</li>
+                <li>Uygun araçları görüntüleyin</li>
+                <li>Beğendiğiniz aracı seçin</li>
+                <li>Kişisel bilgilerinizi doldurun</li>
+                <li>Ödeme işlemini tamamlayın</li>
+              </ol>
+              <div class="highlight">
+                <strong>İpucu:</strong> Erken rezervasyon yaparak daha uygun fiyatlardan yararlanabilirsiniz.
+              </div>
+            </div>
+          </div>
+          <div class="faq-item" data-category="rezervasyon">
+            <div class="faq-question">
+              <span>Rezervasyonumu nasıl iptal edebilirim?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>Rezervasyon iptali için:</p>
+              <ul>
+                <li>Hesabınıza giriş yapın</li>
+                <li>"Rezervasyonlarım" bölümüne gidin</li>
+                <li>İptal etmek istediğiniz rezervasyonu seçin</li>
+                <li>"İptal Et" butonuna tıklayın</li>
+              </ul>
+              <p><strong>İptal koşulları:</strong> Teslim tarihinden 24 saat öncesine kadar ücretsiz iptal yapabilirsiniz.</p>
+            </div>
+          </div>
+          <div class="faq-item" data-category="rezervasyon">
+            <div class="faq-question">
+              <span>Rezervasyonumu değiştirebilir miyim?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>Evet, rezervasyonunuzu değiştirebilirsiniz. Müsaitlik durumuna göre tarih, araç veya lokasyon değişikliği yapabilirsiniz. Değişiklik için rezervasyon numaranızla müşteri hizmetlerini arayın.</p>
+            </div>
+          </div>
+          <div class="faq-item" data-category="odeme">
+            <div class="faq-question">
+              <span>Hangi ödeme yöntemlerini kabul ediyorsunuz?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>Kabul ettiğimiz ödeme yöntemleri:</p>
+              <ul>
+                <li> Kredi kartı (Visa, Mastercard, American Express)</li>
+                <li> Banka kartı</li>
+                <li> Havale/EFT</li>
+                <li> Dijital cüzdanlar</li>
+              </ul>
+              <p>Tüm ödemeler 256-bit SSL şifrelemesi ile güvence altındadır.</p>
+            </div>
+          </div>
+          <div class="faq-item" data-category="odeme">
+            <div class="faq-question">
+              <span>Depozit ne zaman iade ediliyor?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+              <p>Depozit iadesi süreci:</p>
+              <ul>
+                <li>Araç hasarsız teslim edildiğinde bloke kaldırılır</li>
+                <li>Banka işlemleri 3-7 iş günü sürebilir</li>
+                <li>Hasar durumunda ekspertiz sonrası işlem yapılır</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-info">
+        <h3> İletişim</h3>
+        <div class="contact-item">
+          <div class="contact-icon"></div>
+          <div>
+            <strong>Telefon</strong><br>
+            0374 955 21 52
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"></div>
+          <div>
+            <strong>WhatsApp</strong><br>
+            0374 955 21 52
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"></div>
+          <div>
+            <strong>E-posta</strong><br>
+            info@urcar.com
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"></div>
+          <div>
+            <strong>Çalışma Saatleri</strong><br>
+            7/24 Hizmet
+          </div>
+        </div>
+      </div>
+
+              <a href="bizeulaşın.html" class="btn" style="width: 100%; margin-top: 20px;">Bize Ulaşın</a>
+    </div>
+  </div> <footer>
+    <p class="lang-tr visible">© UR-CAR - Tüm hakları saklıdır.</p>
+    <p class="lang-en">© UR-CAR - All rights reserved.</p>
+    <p class="lang-fr">© UR-CAR - Tous droits réservés.</p>
+  </footer>
+
+  <script>
+      // FAQ Açma/Kapama
+      document.querySelectorAll('.faq-question').forEach(question => {
+          question.addEventListener('click', () => {
+              const answer = question.nextElementSibling;
+              const icon = question.querySelector('.faq-icon');
+              
+              // Diğer açık soruları kapat
+              document.querySelectorAll('.faq-answer.active').forEach(openAnswer => {
+                  if (openAnswer !== answer) {
+                      openAnswer.classList.remove('active');
+                      openAnswer.previousElementSibling.querySelector('.faq-icon').classList.remove('rotate');
+                  }
+              });
+              
+              answer.classList.toggle('active');
+              icon.classList.toggle('rotate');
+          });
+      });
+
+      // Kategori Filtreleme
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+              const category = btn.dataset.category;
+              
+              // Aktif tab güncelle
+              document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              
+              // FAQ'ları filtrele
+              const faqItems = document.querySelectorAll('.faq-item');
+              faqItems.forEach(item => {
+                  if (category === 'all' || item.dataset.category === category) {
+                      item.style.display = 'block';
+                  } else {
+                      item.style.display = 'none';
+                  }
+              });
+          });
+      });
+
+      // Arama Fonksiyonu
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          const faqItems = document.querySelectorAll('.faq-item');
+          
+          faqItems.forEach(item => {
+              const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+              const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+              
+              if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                  item.style.display = 'block';
+              } else {
+                  item.style.display = 'none';
+              }
+          });
+          
+          // Arama yapılıyorsa tüm kategorileri göster
+          if (searchTerm) {
+              document.querySelectorAll('.tab-btn').forEach(btn => {
+                  btn.classList.remove('active');
+              });
+              document.querySelector('[data-category="all"]').classList.add('active');
+          }
+      });
+
+      // Yardım öğelerine tıklama efekti
+      document.querySelectorAll('.help-item').forEach(item => {
+          item.addEventListener('click', () => {
+              item.style.transform = 'scale(0.98)';
+              setTimeout(() => {
+                  item.style.transform = 'translateX(5px)';
+              }, 100);
+          });
+      });
+
+      // Sayfa yüklendiğinde animasyon
+      window.addEventListener('load', () => {
+          document.querySelectorAll('.faq-item').forEach((item, index) => {
+              setTimeout(() => {
+                  item.style.opacity = '1';
+                  item.style.transform = 'translateY(0)';
+              }, index * 100);
+          });
+      });
+
+      // Initial CSS for animation
+      document.querySelectorAll('.faq-item').forEach(item => {
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(20px)';
+          item.style.transition = 'all 0.5s ease';
+      });
+
+    // DİL DEĞİŞTİRME FONKSİYONU
+    function switchLanguage(lang) {
+      const tr = document.querySelectorAll('.lang-tr');
+      const en = document.querySelectorAll('.lang-en');
+      const fr = document.querySelectorAll('.lang-fr');
+
+      tr.forEach(el => el.classList.remove('visible'));
+      en.forEach(el => el.classList.remove('visible'));
+      fr.forEach(el => el.classList.remove('visible'));
+
+      if (lang === 'tr') {
+        tr.forEach(el => el.classList.add('visible'));
+      } else if (lang === 'en') {
+        en.forEach(el => el.classList.add('visible'));
+      } else if (lang === 'fr') {
+        fr.forEach(el => el.classList.add('visible'));
+      }
+    }
+  </script>
+</body>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UR-CAR</title>UR-CAR
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --primary: #003366;
+      --dark: #333;
+      --light: #fff;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      background: var(--light);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    nav button {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #0072d6;
+    }
+
+    .car-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .car {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .car:hover {
+      transform: translateY(-5px);
+    }
+
+    .car img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .car-info {
+      padding: 1rem;
+    }
+
+    .car-info h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .car-info p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .car-info a {
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .car-info a:hover {
+      background: #0072d6;
+    }
+
+    .lang-tr, .lang-en {
+      display: none;
+    }
+
+    .visible {
+      display: block;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="lang-tr visible">Araç Satış Sitesi</h1>
+    <h1 class="lang-en">Car Sales Website</h1>
+    <p class="lang-tr visible">Uygun fiyatlı ve kaliteli araçlar burada!</p>
+    <p class="lang-en">Affordable and quality cars available here!</p>
+  </header>
+
+  <nav>
+    <button onclick="switchLanguage('tr')">Türkçe</button>
+    <button onclick="switchLanguage('en')">English</button>
+  </nav>
+
+  <main class="car-container">
+    <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 1">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Toyota Corolla</h2>
+        <h2 class="lang-en">Toyota Corolla</h2>
+        <p class="lang-tr visible">Konforlu ve ekonomik bir sedan araç.</p>
+        <p class="lang-en">Comfortable and economical sedan car.</p>
+        <a href="C:\Users\MONSTER\Desktop\index2.htm" class="lang-tr visible">Detayları Gör</a>
+        <a href="C:\Users\MONSTER\Desktop\index2.htm" class="lang-en">View Details</a>
+      </div>
+    </div>
+
+    <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 2">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Ford Focus</h2>
+        <h2 class="lang-en">Ford Focus</h2>
+        <p class="lang-tr visible">Güçlü motoru ve şık tasarımı ile dikkat çeker.</p>
+        <p class="lang-en">Notable for its powerful engine and stylish design.</p>
+        <a href="model2.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model2.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+
+    <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 3">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Renault Clio</h2>
+        <h2 class="lang-en">Renault Clio</h2>
+        <p class="lang-tr visible">Şehir içi kullanım için kompakt ve çevik bir araç.</p>
+        <p class="lang-en">A compact and agile car ideal for city use.</p>
+        <a href="model3.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model3.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+
+    <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">BMW 3 Serisi</h2>
+        <h2 class="lang-en">BMW 3 Series</h2>
+        <p class="lang-tr visible">Lüks ve performansı bir arada sunar.</p>
+        <p class="lang-en">Combines luxury and performance in one.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">BMW 3 Serisi</h2>
+        <h2 class="lang-en">BMW 3 Series</h2>
+        <p class="lang-tr visible">Lüks ve performansı bir arada sunar.</p>
+        <p class="lang-en">Combines luxury and performance in one.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">BMW 3 Serisi</h2>
+        <h2 class="lang-en">BMW 3 Series</h2>
+        <p class="lang-tr visible">Lüks ve performansı bir arada sunar.</p>
+        <p class="lang-en">Combines luxury and performance in one.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">BMW 3 Serisi</h2>
+        <h2 class="lang-en">BMW 3 Series</h2>
+        <p class="lang-tr visible">Lüks ve performansı bir arada sunar.</p>
+        <p class="lang-en">Combines luxury and performance in one.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="https://via.placeholder.com/300x200" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">got metın</h2>
+        <h2 class="lang-en">BMW 3 Series</h2>
+        <p class="lang-tr visible">Lüks ve performansı bir arada sunar.</p>
+        <p class="lang-en">Combines luxury and performance in one.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+    </main>
+
+  <footer>
+    <p class="lang-tr visible">© 2025 Araç Satış Sitesi - Tüm hakları saklıdır.</p>
+    <p class="lang-en">© 2025 Car Sales Website - All rights reserved.</p>
+  </footer>
+
+  <script>
+    function switchLanguage(lang) {
+      const tr = document.querySelectorAll('.lang-tr');
+      const en = document.querySelectorAll('.lang-en');
+
+      if (lang === 'tr') {
+        tr.forEach(el => el.classList.add('visible'));
+        en.forEach(el => el.classList.remove('visible'));
+      } else {
+        en.forEach(el => el.classList.add('visible'));
+        tr.forEach(el => el.classList.remove('visible'));
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Toyota Araç Modelleri</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #d32f2f;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .language-switcher {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .language-switcher button {
+      background-color: white;
+      color: #d32f2f;
+      border: 1px solid #d32f2f;
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .car-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .car-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .car-info {
+      padding: 1rem;
+    }
+
+    .car-info h2 {
+      margin-top: 0;
+      color: #d32f2f;
+    }
+
+    .car-info p {
+      color: #333;
+    }
+
+    .car-info a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #d32f2f;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .car-info a:hover {
+      background-color: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 id="main-title">Toyota Araç Modelleri</h1>
+    <div class="language-switcher">
+      <button onclick="setLanguage('tr')">Türkçe</button>
+      <button onclick="setLanguage('en')">English</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="car-card">
+      <img src="https://via.placeholder.com/900x300?text=Toyota+Corolla" alt="Toyota Corolla">
+      <div class="car-info">
+        <h2>Toyota Corolla</h2>
+        <p data-tr="Ekonomik, güvenilir ve şehir içi kullanım için ideal bir sedan."
+           data-en="Economical, reliable, and ideal for city driving.">
+           Ekonomik, güvenilir ve şehir içi kullanım için ideal bir sedan.
+        </p>
+        <a href="corolla.html" data-tr="Detayları Gör" data-en="View Details">Detayları Gör</a>
+      </div>
+    </div>
+
+    <div class="car-card">
+      <img src="https://via.placeholder.com/900x300?text=Toyota+Camry" alt="Toyota Camry">
+      <div class="car-info">
+        <h2>Toyota Camry</h2>
+        <p data-tr="Konfor ve performansı bir araya getiren güçlü bir orta sınıf araç."
+           data-en="A strong mid-size car combining comfort and performance.">
+           Konfor ve performansı bir araya getiren güçlü bir orta sınıf araç.
+        </p>
+        <a href="camry.html" data-tr="Detayları Gör" data-en="View Details">Detayları Gör</a>
+      </div>
+    </div>
+
+    <div class="car-card">
+      <img src="https://via.placeholder.com/900x300?text=Toyota+RAV4" alt="Toyota RAV4">
+      <div class="car-info">
+        <h2>Toyota RAV4</h2>
+        <p data-tr="Modern SUV tasarımı, yüksek güvenlik ve geniş iç hacim."
+           data-en="Modern SUV design, high safety, and spacious interior.">
+           Modern SUV tasarımı, yüksek güvenlik ve geniş iç hacim.
+        </p>
+        <a href="rav4.html" data-tr="Detayları Gör" data-en="View Details">Detayları Gör</a>
+      </div>
+    </div>
+
+    <div class="car-card">
+      <img src="https://via.placeholder.com/900x300?text=Toyota+Yaris" alt="Toyota Yaris">
+      <div class="car-info">
+        <h2>Toyota Yaris</h2>
+        <p data-tr="Kompakt boyutları ile şehir trafiğinde rahat kullanım sağlar."
+           data-en="Compact size makes it ideal for city traffic.">
+           Kompakt boyutları ile şehir trafiğinde rahat kullanım sağlar.
+        </p>
+        <a href="yaris.html" data-tr="Detayları Gör" data-en="View Details">Detayları Gör</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setLanguage(lang) {
+      localStorage.setItem("preferredLanguage", lang);
+
+      document.getElementById("main-title").innerText = 
+        lang === "tr" ? "Toyota Araç Modelleri" : "Toyota Car Models";
+
+      document.querySelectorAll("[data-tr]").forEach(el => {
+        el.innerText = el.getAttribute("data-" + lang);
+      });
+
+      // Sayfa dili güncelle (isteğe bağlı)
+      document.documentElement.lang = lang;
+    }
+
+    // Sayfa yüklendiğinde daha önce seçilen dili uygula
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("preferredLanguage") || "tr";
+      setLanguage(lang);
+    });
+  </script>
+
+</body>
+</html>

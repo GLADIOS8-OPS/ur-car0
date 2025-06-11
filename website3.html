@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UR-CAR</title>UR-CAR
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --primary: #003366;
+      --dark: #333;
+      --light: #fff;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      background: var(--light);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    nav button {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #0072d6;
+    }
+
+    .car-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .car {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .car:hover {
+      transform: translateY(-5px);
+    }
+
+    .car img {
+      width: 100%;
+      height: 50%;
+      object-fit: cover;
+    }
+
+    .car-info {
+      padding: 1rem;
+    }
+
+    .car-info h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .car-info p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .car-info a {
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .car-info a:hover {
+      background: #0072d6;
+    }
+
+    .lang-tr, .lang-en {
+      display: none;
+    }
+
+    .visible {
+      display: block;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Price Container Styles */
+    .price-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background-color: #f0f8ff;
+      margin-top: 2rem;
+    }
+
+    .price-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .price-card h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-amount {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0072d6;
+      margin-bottom: 1rem;
+    }
+
+    .price-period {
+      display: block;
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .price-features li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .price-features li::before {
+      content: "✓";
+      color: #0072d6;
+      position: absolute;
+      left: 0;
+    }
+
+    .price-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .price-button:hover {
+      background-color: #0072d6;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="lang-tr visible">UR-CAR</h1>
+    <h1 class="lang-en">UR-CAR</h1>
+    <p class="lang-tr visible">En İyisi ve En Özeli</p>
+    <p class="lang-en">Best & Special</p>
+  </header>
+
+  <nav>
+    <button onclick="switchLanguage('tr')">Türkçe</button>
+    <button onclick="switchLanguage('en')">English</button>
+  </nav>
+
+  <main class="car-container">
+    <div class="car">
+      <img src="C:\Users\MONSTER\Desktop\Yerelleştirme Final\enyaq.jpg" alt="Car 1">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Skoda Enyaq</h2>
+        <h2 class="lang-en">Skoda Enyaq</h2>
+        <p class="lang-tr visible">Doğaya saygılı ve sessiz bir sürüş keyfi.</p>
+        <p class="lang-en">Harmony with nature and pleasant driving.</p>
+        <a href="C:\Users\MONSTER\Desktop\index2.htm" class="lang-tr visible">Detayları Gör</a>
+        <a href="C:\Users\MONSTER\Desktop\index2.htm" class="lang-en">View Details</a>
+      </div>
+    </div>
+
+    <div class="car">
+      <img src="C:\Users\MONSTER\Desktop\Yerelleştirme Final\elroqqq.jpg" alt="Car 2">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Skoda Elroq</h2>
+        <h2 class="lang-en">Skoda Elroq</h2>
+        <p class="lang-tr visible">Çevreci ve ekonomik bir deneyim.</p>
+        <p class="lang-en">Enviromentalist and economical experience.</p>
+        <a href="model2.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model2.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+
+    <div class="car">
+      <img src="C:\Users\MONSTER\Downloads\WhatsApp Image 2025-05-21 at 10.49.39.jpeg" alt="Car 3">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Dodge Viper</h2>
+        <h2 class="lang-en">Dodge Viper</h2>
+        <p class="lang-tr visible">Asfaltı yırtmaya hazır olun.</p>
+        <p class="lang-en">Ready for tearing the asphalt.</p>
+        <a href="model3.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model3.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+
+    <div class="car">
+      <img src="C:\Users\MONSTER\Downloads\WhatsApp Image 2025-05-21 at 10.52.01.jpeg" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Porsche Cayman 718</h2>
+        <h2 class="lang-en">Porsche Cayman 718</h2>
+        <p class="lang-tr visible">Lüks ve performansı bir arada sunar.</p>
+        <p class="lang-en">Combines luxury and performance in one.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="C:\Users\MONSTER\Desktop\Yerelleştirme Final\feista.jpg" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Ford Fiesta</h2>
+        <h2 class="lang-en">Ford Fiesta</h2>
+        <p class="lang-tr visible">Küçük ama hızlı bir macera.</p>
+        <p class="lang-en">Adventure with littlebug.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="C:\Users\MONSTER\Desktop\Yerelleştirme Final\klıo.jpg" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Renault Clio</h2>
+        <h2 class="lang-en">Renault Clio</h2>
+        <p class="lang-tr visible">İstediğiniz yere park edebilme özgürlüğü.</p>
+        <p class="lang-en">Get park wherever you wanted.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="C:\Users\MONSTER\Downloads\WhatsApp Image 2025-05-21 at 10.51.22.jpeg" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Volkswagen Passat Variant</h2>
+        <h2 class="lang-en">Volkswagen Passat Variant</h2>
+        <p class="lang-tr visible">Güzel bir haftasonuna en iyi başlangıç.</p>
+        <p class="lang-en">Best starting for a good weekend.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+        <div class="car">
+      <img src="C:\Users\MONSTER\Desktop\Yerelleştirme Final\ASW.jpg" alt="Car 4">
+      <div class="car-info">
+        <h2 class="lang-tr visible">Opel Astra SW</h2>
+        <h2 class="lang-en">Opel Astra SW</h2>
+        <p class="lang-tr visible">Geniş ailelerin bir numaralı tercihi.</p>
+        <p class="lang-en">First choice of extended family.</p>
+        <a href="model4.html" class="lang-tr visible">Detayları Gör</a>
+        <a href="model4.html" class="lang-en">View Details</a>
+      </div>
+    </div>
+    </main>
+
+  <footer>
+    <p class="lang-tr visible">- FİYATLANDIRMA -</p>
+    <p class="lang-en">- PRICES -</p>
+  </footer>
+
+  <!-- Price Container added below the footer -->
+  <div class="price-container">
+    <div class="price-card">
+      <h3 class="lang-tr visible">Temel Plan</h3>
+      <h3 class="lang-en">Basic Plan</h3>
+      <div class="price-amount">399 ₺<span class="price-period lang-tr visible"></span><span class="price-period lang-en"></span></div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Lastik, Ayna ve Ön Cam Güvencesi</li>
+        <li class="lang-tr visible">Mini Hasar Güvencesi</li>
+        <li class="lang-en">Tyre, Mirror and Windshield Protection</li>
+        <li class="lang-en">Minor Damage Protection</li>
+        <li class="lang-tr visible">Protection</li>
+        <li class="lang-en">Protection</li>
+        <li class="lang-tr visible">Protection</li>
+        <li class="lang-en">Protection</li>
+        <li class="lang-tr visible">Protection</li> 
+        <li class="lang-en">Protection</li>
+      </ul>
+
+
+      <a href="#" class="price-button lang-tr visible">Hemen Satın Al</a>
+      <a href="#" class="price-button lang-en">Buy Now</a>
+    </div>
+    
+    <div class="price-card">
+      <h3 class="lang-tr visible">Standart Plan</h3>
+      <h3 class="lang-en">Standard Plan</h3>
+      <div class="price-amount">499 ₺<span class="price-period lang-tr visible"></span><span class="price-period lang-en"></span></div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Lastik, Ayna ve Ön Cam Güvencesi</li>
+        <li class="lang-tr visible">Orta Seviye Hasar Güvencesi</li>
+        <li class="lang-tr visible">Hırsızlığa Karşı Koruma</li>
+        <li class="lang-tr visible">7/24 Yol Yardımı</li>
+        <li class="lang-en">Tyre, Mirror and Windshield Protection</li>
+        <li class="lang-en">Middle Damage Protection</li>
+        <li class="lang-en">Theft Protection</li>
+        <li class="lang-en">7/24 Roadside Assistance</li>
+        <li class="lang-tr visible">Protection</li>
+        <li class="lang-en">Protection</li>
+      </ul>
+      <a href="#" class="price-button lang-tr visible">Hemen Satın Al</a>
+      <a href="#" class="price-button lang-en">Buy Now</a>
+    </div>
+    
+    <div class="price-card">
+      <h3 class="lang-tr visible">Premium Plan</h3>
+      <h3 class="lang-en">Premium Plan</h3>
+      <div class="price-amount">699 ₺<span class="price-period lang-tr visible"></span><span class="price-period lang-en"></span></div>
+      <span class="lang-en">$99</span>
+      <ul class="price-features">
+        <li class="lang-tr visible">Lastik, Ayna, Far ve Ön Cam Güvencesi</li>
+        <li class="lang-tr visible">Büyük Hasar Güvencesi</li>
+        <li class="lang-tr visible">Hırsızlığa Karşı Koruma</li>
+        <li class="lang-tr visible">7/24 Yol Yardımı</li>
+        <li class="lang-tr visible">Yedek Araç Hizmeti</li>
+        <li class="lang-en">Tyre, Mirror, Headlight and Windshield Window Protection</li>
+        <li class="lang-en">High Damage Protection</li>
+        <li class="lang-en">Theft Protection</li>
+        <li class="lang-en">7/24 Roadside Assistance</li>
+        <li class="lang-en">Spare Car Service</li>
+      </ul>
+          <a href="#" class="price-button lang-tr visible">Hemen Satın Al</a> <a class="price-button lang-en">Buy Now</a>
+    </div>
+
+  </div>
+
+  <script>
+    function switchLanguage(lang) {
+      const tr = document.querySelectorAll('.lang-tr');
+      const en = document.querySelectorAll('.lang-en');
+
+      if (lang === 'tr') {
+        tr.forEach(el => el.classList.add('visible'));
+        en.forEach(el => el.classList.remove('visible'));
+      } else {
+        en.forEach(el => el.classList.add('visible'));
+        tr.forEach(el => el.classList.remove('visible'));
+      }
+    }
+  </script>
+  <footer>
+    <p class="lang-tr visible">© UR-CAR - Tüm hakları saklıdır.</p>
+    <p class="lang-en">© UR-CAR - All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Toyota Yaris</title>
+  <style>
+    :root {
+      --primary: #1e90ff;
+      --light: #fff;
+      --dark: #333;
+      --bg: #f4f4f4;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    nav {
+      text-align: right;
+      padding: 1rem;
+    }
+
+    nav button {
+      margin-left: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    h2 {
+      margin-top: 1rem;
+    }
+
+    .lang-tr, .lang-en {
+      display: none;
+    }
+
+    .visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="lang-tr visible">Toyota Yaris</h1>
+    <h1 class="lang-en">Toyota Yaris</h1>
+  </header>
+
+  <nav>
+    <button onclick="switchLanguage('tr')">Türkçe</button>
+    <button onclick="switchLanguage('en')">English</button>
+  </nav>
+
+  <div class="container">
+    <img src="https://toyota-cms-media.s3.amazonaws.com/wp-content/uploads/2023/05/2023-toyota-yaris-exterior.webp" alt="Toyota Yaris" />
+    
+    <div class="lang-tr visible">
+      <h2>Genel Bilgi</h2>
+      <p>Toyota Yaris, şehir içi kullanım için kompakt, ekonomik ve çevre dostu bir araçtır. Hem hibrit hem benzinli motor seçenekleriyle sunulur.</p>
+
+      <h2>Öne Çıkan Özellikler</h2>
+      <ul>
+        <li>1.5L hibrit motor seçeneği</li>
+        <li>Otomatik şanzıman</li>
+        <li>Gelişmiş güvenlik sistemleri (Toyota Safety Sense)</li>
+        <li>Apple CarPlay ve Android Auto desteği</li>
+      </ul>
+    </div>
+
+    <div class="lang-en">
+      <h2>Overview</h2>
+      <p>The Toyota Yaris is a compact, fuel-efficient, and eco-friendly vehicle ideal for urban use. It is available with both hybrid and petrol engine options.</p>
+
+      <h2>Key Features</h2>
+      <ul>
+        <li>1.5L hybrid engine option</li>
+        <li>Automatic transmission</li>
+        <li>Advanced safety systems (Toyota Safety Sense)</li>
+        <li>Supports Apple CarPlay and Android Auto</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function switchLanguage(lang) {
+      const tr = document.querySelectorAll('.lang-tr');
+      const en = document.querySelectorAll('.lang-en');
+
+      if (lang === 'tr') {
+        tr.forEach(el => el.classList.add('visible'));
+        en.forEach(el => el.classList.remove('visible'));
+      } else {
+        en.forEach(el => el.classList.add('visible'));
+        tr.forEach(el => el.classList.remove('visible'));
+      }
+
+      localStorage.setItem('preferredLanguage', lang);
+      document.documentElement.lang = lang;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const lang = localStorage.getItem('preferredLanguage') || 'tr';
+      switchLanguage(lang);
+    });
+  </script>
+</body>
+</html>

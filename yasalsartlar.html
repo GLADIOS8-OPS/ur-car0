@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UR-CAR | Yasal Şartlar</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --primary: #003366;
+      --dark: #333;
+      --light: #fff;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+ 
+    header h1 {
+      font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    header p {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.2rem;
+      font-style: normal;
+      text-align: center;
+    }
+
+    h2{
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 2.8rem;
+      font-style: italic;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    h3{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 2.0rem;
+      font-style: italic;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .container p{
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.1rem;
+      font-style: normal;
+      text-align: justify;
+      margin: 1rem 0;
+      line-height: 1.8;
+      padding: 0 1rem;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      background: var(--light);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    nav button {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #0072d6;
+    }
+
+    .car-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .car {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .car:hover {
+      transform: translateY(-5px);
+    }
+
+    .car img {
+      width: 100%;
+      height: 50%;
+      object-fit: cover;
+    }
+
+    .car-info {
+      padding: 1rem;
+    }
+
+    .car-info h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .car-info p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .car-info a {
+      text-decoration: none;
+      background: var(--primary);
+      color: var(--light);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .car-info a:hover {
+      background: #0072d6;
+    }
+
+    .lang-tr, .lang-en, .lang-fr {
+      display: none;
+    }
+
+    .lang-tr.visible, .lang-en.visible, .lang-fr.visible {
+      display: block;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Price Container Styles */
+    .price-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background-color: #f0f8ff;
+      margin-top: 2rem;
+    }
+
+    .price-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .price-card h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-amount {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0072d6;
+      margin-bottom: 1rem;
+    }
+
+    .price-period {
+      display: block;
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .price-features li {
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-size: larger;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-style: italic;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .price-features li::before {
+      content: "✓";
+      color: #0072d6;
+      position: absolute;
+      left: 0;
+    }
+
+    .price-features li.hidden-protection {
+      color: white;
+      visibility: hidden;
+    }
+
+    .price-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .price-button:hover {
+      background-color: #0072d6;
+    }
+
+    /* Footer Navigation Styles */
+    .footer-nav {
+      background: white;
+      padding: 3rem 2rem;
+      border-top: 3px solid var(--primary);
+    }
+
+    .footer-nav-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-nav-section {
+      text-align: left;
+    }
+
+    .footer-nav-section h3 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .footer-nav-section ul {
+      list-style: none;
+    }
+
+    .footer-nav-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-nav-section ul li a {
+      color: var(--dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-nav-section ul li a:hover {
+      color: #0072d6;
+    }
+
+    .car-image {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 2rem auto;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+        text-align: center;
+      }
+      
+      .footer-nav-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      
+      .container {
+        padding: 1rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-nav-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="lang-tr visible">UR-CAR</h1>
+    <h1 class="lang-en">UR-CAR</h1>
+    <h1 class="lang-fr">UR-CAR</h1>
+    <p class="lang-tr visible">En İyisi ve En Özeli</p>
+    <p class="lang-en">Best & Special</p>
+    <p class="lang-fr">Le Meilleur et le Plus Spécial</p>
+  </header>
+
+  <nav>
+    <button onclick="switchLanguage('tr')">Türkçe</button>
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('fr')">Français</button>
+  </nav>
+
+  <div class="container">
+    <h2 class="lang-tr visible">YASAL ŞARTLAR VE YÜKÜMLÜLÜKLER</h2>
+    <h2 class="lang-en">LEGAL TERMS AND OBLIGATIONS</h2>
+    <h2 class="lang-fr">CONDITIONS LÉGALES ET OBLIGATIONS</h2>
+    
+    <h3 class="lang-tr visible">Şartlar</h3>
+    <h3 class="lang-en">Terms</h3>
+    <h3 class="lang-fr">Conditions</h3>
+    
+    <p class="lang-tr visible"> Öncelikle siz değerli müşterilerimizin araç kiralamadan önce bir sürücü belgesine sahip olmanız gerekmektedir. En az 21 yaşında ve B sınıfı ehliyet sahibi olmak temel şarttır ancak kiralamak istediğiniz araç sınıfına göre bu şartlar değişiklik gösterebilir.
+
+Kiralama sırasında kiralayan kişinin kimlik bilgilerinin yanı sıra bir de kredi kartı aranır. Bu kart hizmetin ve karşılığının teminatı amacıyla kullanılır ve kira süresince oluşabilecek ceza, hasar veya ek masraflar gibi problemler için güvence oluşturur. 
+Aracı kiralayan kişi belirtilen şartlara uymakla yükümlüdür. Bu şartlara uymamak, aracı alkollü kullanmak, izinsiz yurtdışına çıkarmak veya başkasına kullandırmak gibi, sözleşmenin ihlali demektir ki bu da olumsuz sonuçlar doğuracaktır. Ayrıca trafik cezaları, otopark ücretleri ve ekstra ücretler gibi giderler de kiralayan kişiye aittir.
+Kiralama süresi sona erdiğinde araç, teslim alındığı gibi, belirlenen tarih ve saatte iade edilmelidir. Geç teslimatlar ek olarak ücretlendirilir (saatlik 100₺). Ayrıca araçta hasar, çizik ya da eksik yakıt varsa, bunlar da sözleşmeye göre değerlendirilir ve ilgili bedeller yansıtılır.
+
+Tüm bu süreçler hem siz değerli müşterimizin hem de kuruluşumuzun haklarını korumayı amaçlamaktadır, anlayışınız için teşekkür ederiz.</p>
+    <p class="lang-en">Before renting a vehicle, it is essential that you, our valued customer, hold a valid driver’s license. The minimum requirement is to be at least 21 years old and to have a Class B driver’s license. However, these conditions may vary depending on the category of the vehicle you wish to rent.
+
+During the rental process, the renter must provide both identification and a credit card. This card is used as a guarantee for the service and to cover any potential penalties, damages, or additional charges that may arise during the rental period.
+
+The renter is obligated to comply with the stated terms and conditions. Failure to do so — such as driving under the influence, taking the vehicle abroad without permission, or allowing another person to drive — constitutes a breach of contract and may lead to serious consequences. In addition, expenses such as traffic fines, parking fees, and other extra costs are the responsibility of the renter.
+
+At the end of the rental period, the vehicle must be returned as it was received, on the agreed date and time. Late returns will incur an additional charge ($100 per hour). If the vehicle is returned with any damage, scratches, or without a full fuel tank, these issues will be assessed in accordance with the contract and the corresponding charges will apply.
+
+This entire process is designed to protect both your rights and those of our company. We thank you for your understanding.</p>
+    <p class="lang-fr">Avant de louer un véhicule, il est indispensable que vous, notre client(e) précieux(se), soyez titulaire d’un permis de conduire valide. L’âge minimum requis est de 21 ans avec un permis de catégorie B. Cependant, ces conditions peuvent varier en fonction de la catégorie du véhicule que vous souhaitez louer.
+
+Lors de la location, le locataire doit fournir une pièce d’identité ainsi qu’une carte de crédit. Cette carte sert de garantie pour le service et couvre les éventuelles amendes, dommages ou frais supplémentaires pouvant survenir pendant la période de location.
+
+Le locataire est tenu de respecter les conditions spécifiées. Le non-respect de celles-ci — comme conduire sous l’influence de l’alcool, emmener le véhicule à l’étranger sans autorisation ou le prêter à un tiers — constitue une violation du contrat et peut entraîner des conséquences négatives. De plus, les frais tels que les amendes de circulation, les frais de stationnement et autres charges supplémentaires sont à la charge du locataire.
+
+À la fin de la période de location, le véhicule doit être restitué tel qu’il a été reçu, à la date et à l’heure convenues. Tout retard entraîne des frais supplémentaires (€100 par heure). Si le véhicule est restitué avec des dommages, des rayures ou sans plein de carburant, ces éléments seront évalués conformément au contrat, et les frais correspondants seront appliqués.
+
+L’ensemble de cette procédure vise à protéger à la fois vos droits et ceux de notre société. Nous vous remercions de votre compréhension.</p>
+
+    <h3 class="lang-tr visible">İşlemler ve Bilgilendirmeler</h3>
+    <h3 class="lang-en">Procedures and Notifications</h3>
+    <h3 class="lang-fr">Procédures et Information</h3>
+    
+    <p class="lang-tr visible">Bir tüketici olarak sözleşme şartlarına uymanız ve aksi takdirde yasal yükümlülüklere tabii olacağınızı kabul etmiş olmanız gerekmektedir. Tüm işlemler kayıt ediliyor olup kişisel bilgilerinizin güvenliği adına saklanıyor olacak. Aksi veya olağandışı durumlar için lütfen bizimle iletişime geçiniz.</p>
+    <p class="lang-en">As a consumer, you are required to comply with the contract terms, and by doing so, you acknowledge that you will be subject to legal obligations should you fail to do so. All transactions are being recorded and your personal information will be stored for security purposes. For any exceptional or unusual circumstances, please contact us..</p>
+    <p class="lang-fr">En tant que consommateur, vous êtes tenu de respecter les termes du contrat, et ce faisant, vous reconnaissez que vous serez soumis à des obligations légales en cas de non-respect. Toutes les transactions sont enregistrées et vos informations personnelles seront stockées à des fins de sécurité. Pour toute circonstance exceptionnelle ou inhabituelle, veuillez nous contacter.</p>
+  </div>
+
+  <footer>
+    <p class="lang-tr visible">© UR-CAR - Tüm hakları saklıdır.</p>
+    <p class="lang-en">© UR-CAR - All rights reserved.</p>
+    <p class="lang-fr">© UR-CAR - Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    function switchLanguage(lang) {
+      // Tüm dil sınıflarını seç
+      const tr = document.querySelectorAll('.lang-tr');
+      const en = document.querySelectorAll('.lang-en');
+      const fr = document.querySelectorAll('.lang-fr');
+
+      // Tüm visible sınıflarını kaldır
+      tr.forEach(el => el.classList.remove('visible'));
+      en.forEach(el => el.classList.remove('visible'));
+      fr.forEach(el => el.classList.remove('visible'));
+
+      // Seçilen dile göre visible sınıfını ekle
+      if (lang === 'tr') {
+        tr.forEach(el => el.classList.add('visible'));
+      } else if (lang === 'en') {
+        en.forEach(el => el.classList.add('visible'));
+      } else if (lang === 'fr') {
+        fr.forEach(el => el.classList.add('visible'));
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+

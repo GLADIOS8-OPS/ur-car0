@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UR-CAR | Online Rezervasyon</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --primary: #003366;
+      --dark: #333;
+      --light: #fff;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      background: var(--light);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    nav button {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background-color: #0072d6;
+    }
+
+    .lang-tr, .lang-en, .lang-fr {
+      display: none;
+    }
+
+    .visible {
+      display: block;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Price Container Styles */
+    .price-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background-color: #f0f8ff;
+      margin-top: 2rem;
+    }
+
+    .price-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .price-card h3 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-amount {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0072d6;
+      margin-bottom: 1rem;
+    }
+
+    .price-period {
+      display: block;
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .price-features li {
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-size: larger;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-style: italic;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .price-features li::before {
+      content: "✓";
+      color: #0072d6;
+      position: absolute;
+      left: 0;
+    }
+
+    .price-features li.hidden-protection {
+      color: white;
+      visibility: hidden;
+    }
+
+    .price-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .price-button:hover {
+      background-color: #0072d6;
+    }
+
+    /* Rezervasyon Bölümü Stilleri */
+    .reservation-section {
+      background-color: #f0f8ff;
+      padding: 3rem 1rem;
+      margin-top: 2rem;
+    }
+    
+    .reservation-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    .reservation-container h2 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    
+    .reservation-form {
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .form-group label {
+      font-weight: bold;
+      color: var(--dark);
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    
+    .day-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    
+    .day-selector label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    
+    .reservation-button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 1rem;
+      width: 100%;
+    }
+    
+    .reservation-button:hover {
+      background-color: #0072d6;
+    }
+
+    /* Dil Seçici Stilleri */
+    .language-selector {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary);
+      border-radius: 5px;
+      padding: 5px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background-color 0.3s;
+    }
+
+    .lang-btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .lang-btn.active {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    @media (max-width: 600px) {
+      .day-selector {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .language-selector {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 1rem;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="lang-tr visible">UR-CAR</h1>
+    <h1 class="lang-en">UR-CAR</h1>
+    <h1 class="lang-fr">UR-CAR</h1>
+    <p class="lang-tr visible">En İyisi ve En Özeli</p>
+    <p class="lang-en">Best & Special</p>
+    <p class="lang-fr">Le Meilleur et le Plus Spécial</p>
+  </header>
+
+  <nav>
+    <button onclick="switchLanguage('tr')">Türkçe</button>
+    <button onclick="switchLanguage('en')">English</button>
+    <button onclick="switchLanguage('fr')">Français</button>
+  </nav>
+
+  <!-- Insurance Plans Container -->
+  <div class="price-container">
+    <div class="price-card">
+      <h3 class="lang-tr visible">Temel Plan</h3>
+      <h3 class="lang-en">Basic Plan</h3>
+      <h3 class="lang-fr">Plan de Base</h3>
+      <div class="price-amount">
+        <span class="lang-tr visible">399₺</span>
+        <span class="lang-en">$49</span>
+        <span class="lang-fr">€49</span>
+        <span class="price-period lang-tr visible"></span>
+        <span class="price-period lang-en"></span>
+        <span class="price-period lang-fr"></span>
+      </div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Lastik, Ayna ve Ön Cam Güvencesi</li>
+        <li class="lang-tr visible">Mini Hasar Güvencesi</li>
+        <li class="lang-en">Tyre, Mirror and Windshield Protection</li>
+        <li class="lang-en">Minor Damage Protection</li>
+        <li class="lang-fr">Protection Pneu, Miroir et Pare-brise</li>
+        <li class="lang-fr">Protection Dégâts Mineurs</li>
+        <li class="lang-tr visible hidden-protection">Protection</li>
+        <li class="lang-en hidden-protection">Protection</li>
+        <li class="lang-fr hidden-protection">Protection</li>
+        <li class="lang-tr visible hidden-protection">Protection</li>
+        <li class="lang-en hidden-protection">Protection</li>
+        <li class="lang-fr hidden-protection">Protection</li>
+        <li class="lang-tr visible hidden-protection">Protection</li> 
+        <li class="lang-en hidden-protection">Protection</li>
+        <li class="lang-fr hidden-protection">Protection</li>
+      </ul>
+
+    </div>
+    
+    <div class="price-card">
+      <h3 class="lang-tr visible">Standart Plan</h3>
+      <h3 class="lang-en">Standard Plan</h3>
+      <h3 class="lang-fr">Plan Standard</h3>
+      <div class="price-amount">
+        <span class="lang-tr visible">499₺</span>
+        <span class="lang-en">$69</span>
+        <span class="lang-fr">€69</span>
+        <span class="price-period lang-tr visible"></span>
+        <span class="price-period lang-en"></span>
+        <span class="price-period lang-fr"></span>
+      </div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Lastik, Ayna ve Ön Cam Güvencesi</li>
+        <li class="lang-tr visible">Orta Seviye Hasar Güvencesi</li>
+        <li class="lang-tr visible">Hırsızlığa Karşı Koruma</li>
+        <li class="lang-tr visible">7/24 Yol Yardımı</li>
+        <li class="lang-en">Tyre, Mirror and Windshield Protection</li>
+        <li class="lang-en">Middle Damage Protection</li>
+        <li class="lang-en">Theft Protection</li>
+        <li class="lang-en">7/24 Roadside Assistance</li>
+        <li class="lang-fr">Protection Pneu, Miroir et Pare-brise</li>
+        <li class="lang-fr">Protection Dégâts Moyens</li>
+        <li class="lang-fr">Protection contre le Vol</li>
+        <li class="lang-fr">Assistance Routière 24/7</li>
+        <li class="lang-tr visible hidden-protection">Protection</li>
+        <li class="lang-en hidden-protection">Protection</li>
+        <li class="lang-fr hidden-protection">Protection</li>
+      </ul>
+
+    </div>
+    
+    <div class="price-card">
+      <h3 class="lang-tr visible">Premium Plan</h3>
+      <h3 class="lang-en">Premium Plan</h3>
+      <h3 class="lang-fr">Plan Premium</h3>
+      <div class="price-amount">
+        <span class="lang-tr visible">699₺</span>
+        <span class="lang-en">$99</span>
+        <span class="lang-fr">€99</span>
+        <span class="price-period lang-tr visible"></span>
+        <span class="price-period lang-en"></span>
+        <span class="price-period lang-fr"></span>
+      </div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Lastik, Ayna, Far ve Ön Cam Güvencesi</li>
+        <li class="lang-tr visible">Büyük Hasar Güvencesi</li>
+        <li class="lang-tr visible">Hırsızlığa Karşı Koruma</li>
+        <li class="lang-tr visible">7/24 Yol Yardımı</li>
+        <li class="lang-tr visible">Yedek Araç Hizmeti</li>
+        <li class="lang-en">Tyre, Mirror and Windshield Protection</li>
+        <li class="lang-en">High Damage Protection</li>
+        <li class="lang-en">Theft Protection</li>
+        <li class="lang-en">7/24 Roadside Assistance</li>
+        <li class="lang-en">Spare Car Service</li>
+        <li class="lang-fr">Protection Pneu, Miroir, Phare et Pare-brise</li>
+        <li class="lang-fr">Protection Dégâts Élevés</li>
+        <li class="lang-fr">Protection contre le Vol</li>
+        <li class="lang-fr">Assistance Routière 24/7</li>
+        <li class="lang-fr">Service de Voiture de Remplacement</li>
+      </ul>
+
+    </div>
+  </div>
+
+  
+  </section>
+
+  <!-- Car Rental Services Container -->
+  <div class="price-container">
+    <div class="price-card">
+      <h3 class="lang-tr visible">Elektrikli</h3>
+      <h3 class="lang-en">Electric</h3>
+      <h3 class="lang-fr">Électrique</h3>
+      <div class="price-amount">
+        <span class="lang-tr visible"></span>
+        <span class="lang-en"></span>
+        <span class="lang-fr"></span>
+        <span class="price-period lang-tr visible"></span>
+        <span class="price-period lang-en"></span>
+        <span class="price-period lang-fr"></span>
+      </div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Günlük : 1299₺</li>
+        <li class="lang-tr visible">Haftalık : 8799₺</li>
+        <li class="lang-tr visible">Aylık : 32999₺</li>
+        <li class="lang-en">Daily : $29</li>
+        <li class="lang-en">Weekly : $199</li>
+        <li class="lang-en">Monthly : $749</li>
+        <li class="lang-fr">Quotidien : €29</li>
+        <li class="lang-fr">Hebdomadaire : €199</li>
+        <li class="lang-fr">Mensuel : €749</li>
+      </ul>
+
+    </div>
+    
+    <div class="price-card">
+      <h3 class="lang-tr visible">Asfalt Ağlatan</h3>
+      <h3 class="lang-en">Petro-Head</h3>
+      <h3 class="lang-fr">Sportives</h3>
+      <div class="price-amount">
+        <span class="lang-tr visible"></span>
+        <span class="lang-en"></span>
+        <span class="lang-fr"></span>
+        <span class="price-period lang-tr visible"></span>
+        <span class="price-period lang-en"></span>
+        <span class="price-period lang-fr"></span>
+      </div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Günlük : 2199₺</li>
+        <li class="lang-tr visible">Haftalık : 13999₺</li>
+        <li class="lang-tr visible">Aylık : 54999₺</li>
+        <li class="lang-en">Daily : $49</li>
+        <li class="lang-en">Weekly : $329</li>
+        <li class="lang-en">Monthly : $1299</li>
+        <li class="lang-fr">Quotidien : €49</li>
+        <li class="lang-fr">Hebdomadaire : €329</li>
+        <li class="lang-fr">Mensuel : €1299</li>
+      </ul>
+
+    </div>
+    
+    <div class="price-card">
+      <h3 class="lang-tr visible">Şehir Faresi</h3>
+      <h3 class="lang-en">Mini Cars</h3>
+      <h3 class="lang-fr">Mini Voitures</h3>
+      <div class="price-amount">
+        <span class="lang-tr visible"></span>
+        <span class="lang-en"></span>
+        <span class="lang-fr"></span>
+        <span class="price-period lang-tr visible"></span>
+        <span class="price-period lang-en"></span>
+        <span class="price-period lang-fr"></span>
+      </div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Günlük : 999₺</li>
+        <li class="lang-tr visible">Haftalık : 5999₺</li>
+        <li class="lang-tr visible">Aylık : 24999₺</li>
+        <li class="lang-en">Daily : $21</li>
+        <li class="lang-en">Weekly : $139</li>
+        <li class="lang-en">Monthly : $599</li>
+        <li class="lang-fr">Quotidien : €21</li>
+        <li class="lang-fr">Hebdomadaire : €139</li>
+        <li class="lang-fr">Mensuel : €599</li>
+      </ul>
+
+    </div>
+
+    <div class="price-card">
+      <h3 class="lang-tr visible">Aile Reisi</h3>
+      <h3 class="lang-en">Sunday Fathers</h3>
+      <h3 class="lang-fr">Voitures Familiales</h3>
+      <div class="price-amount">
+        <span class="lang-tr visible"></span>
+        <span class="lang-en"></span>
+        <span class="lang-fr"></span>
+        <span class="price-period lang-tr visible"></span>
+        <span class="price-period lang-en"></span>
+        <span class="price-period lang-fr"></span>
+      </div>
+      <ul class="price-features">
+        <li class="lang-tr visible">Günlük : 1699₺</li>
+        <li class="lang-tr visible">Haftalık : 10999₺</li>
+        <li class="lang-tr visible">Aylık : 43999₺</li>
+        <li class="lang-en">Daily : $39</li>
+        <li class="lang-en">Weekly : $249</li>
+        <li class="lang-en">Monthly : $999</li>
+        <li class="lang-fr">Quotidien : €39</li>
+        <li class="lang-fr">Hebdomadaire : €249</li>
+        <li class="lang-fr">Mensuel : €999</li>
+      </ul>
+
+    </div>
+  </div>
+
+    <footer>
+    <p class="lang-tr visible">- ONLINE REZERVASYON -</p>
+    <p class="lang-en">- ONLINE RESERVATION -</p>
+    <p class="lang-fr">- RESERVATİON EN LİGNE -</p>
+  </footer>
+
+  <!-- Rezervasyon Bölümü -->
+  <section class="reservation-section">
+    <div class="reservation-container">
+      <!-- Dil Değiştirme Butonları - Sağ Üst -->
+
+
+      <h2 class="lang-tr visible">Online Rezervasyon</h2>
+      <h2 class="lang-en">Online Reservation</h2>
+      <h2 class="lang-fr">Réservation en Ligne</h2>
+      
+      <form class="reservation-form">
+        <div class="form-group">
+          <label class="lang-tr visible" for="car-select">Araç Seçiniz:</label>
+          <label class="lang-en" for="car-select">Select Vehicle:</label>
+          <label class="lang-fr" for="car-select">Sélectionnez un véhicule:</label>
+          <select id="car-select" name="car">
+            <option value="skoda-enyaq">Skoda Enyaq</option>
+            <option value="skoda-elroq">Skoda Elroq</option>
+            <option value="dodge-viper">Dodge Viper</option>
+            <option value="porsche-cayman">Porsche Cayman 718</option>
+            <option value="ford-fiesta">Ford Fiesta</option>
+            <option value="renault-clio">Renault Clio</option>
+            <option value="vw-passat">VW Passat Variant</option>
+            <option value="opel-astra">Opel Astra SW</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="lang-tr visible" for="name">Ad Soyad:</label>
+          <label class="lang-en" for="name">Full Name:</label>
+          <label class="lang-fr" for="name">Nom Complet:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="lang-tr visible" for="email">E-posta:</label>
+          <label class="lang-en" for="email">Email:</label>
+          <label class="lang-fr" for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="lang-tr visible">Kiralama Günleri:</label>
+          <label class="lang-en">Rental Days:</label>
+          <label class="lang-fr">Jours de Location:</label>
+          <div class="day-selector">
+            <label><input type="checkbox" name="days" value="monday"> <span class="lang-tr visible">Pazartesi</span><span class="lang-en">Monday</span><span class="lang-fr">Lundi</span></label>
+            <label><input type="checkbox" name="days" value="tuesday"> <span class="lang-tr visible">Salı</span><span class="lang-en">Tuesday</span><span class="lang-fr">Mardi</span></label>
+            <label><input type="checkbox" name="days" value="wednesday"> <span class="lang-tr visible">Çarşamba</span><span class="lang-en">Wednesday</span><span class="lang-fr">Mercredi</span></label>
+            <label><input type="checkbox" name="days" value="thursday"> <span class="lang-tr visible">Perşembe</span><span class="lang-en">Thursday</span><span class="lang-fr">Jeudi</span></label>
+            <label><input type="checkbox" name="days" value="friday"> <span class="lang-tr visible">Cuma</span><span class="lang-en">Friday</span><span class="lang-fr">Vendredi</span></label>
+            <label><input type="checkbox" name="days" value="saturday"> <span class="lang-tr visible">Cumartesi</span><span class="lang-en">Saturday</span><span class="lang-fr">Samedi</span></label>
+            <label><input type="checkbox" name="days" value="sunday"> <span class="lang-tr visible">Pazar</span><span class="lang-en">Sunday</span><span class="lang-fr">Dimanche</span></label>
+          </div>
+          </div>
+          <div class="form-group">
+          <label class="lang-tr visible">HAFTALIK :</label>
+          <label class="lang-en">WEEKLY :</label>
+          <label class="lang-fr">SEMAİNE :</label>
+          <div class="day-selector">
+            <label><input type="checkbox" name="Weekly" value="1.week"> <span class="lang-tr visible">1. hafta</span><span class="lang-en">1. week</span><span class="lang-fr">1. semaine</span></label>
+            <label><input type="checkbox" name="Weekly" value="2.week"> <span class="lang-tr visible">2. hafta</span><span class="lang-en">2. week</span><span class="lang-fr">2. semaine</span></label>
+            <label><input type="checkbox" name="Weekly" value="3.week"> <span class="lang-tr visible">3. hafta</span><span class="lang-en">3. week</span><span class="lang-fr">3. semaine</span></label>
+          </div>
+            <div class="form-group">
+          <label class="lang-tr visible">AYLIK :</label>
+          <label class="lang-en">MONTHLY :</label>
+          <label class="lang-fr">MENSUEL :</label>
+          <div class="day-selector">
+            <label><input type="checkbox" name="Monthly" value="january"> <span class="lang-tr visible">Ocak</span><span class="lang-en">January</span><span class="lang-fr">Janvier</span></label>
+            <label><input type="checkbox" name="Monthly" value="february"> <span class="lang-tr visible">Şubat</span><span class="lang-en">February</span><span class="lang-fr">Février</span></label>
+            <label><input type="checkbox" name="Monthly" value="march"> <span class="lang-tr visible">Mart</span><span class="lang-en">March</span><span class="lang-fr">Mars</span></label>
+            <label><input type="checkbox" name="Monthly" value="april"> <span class="lang-tr visible">Nisan</span><span class="lang-en">April</span><span class="lang-fr">Avril</span></label>
+            <label><input type="checkbox" name="Monthly" value="may"> <span class="lang-tr visible">Mayıs</span><span class="lang-en">May</span><span class="lang-fr">Mai</span></label>
+            <label><input type="checkbox" name="Monthly" value="june"> <span class="lang-tr visible">Haziran</span><span class="lang-en">June</span><span class="lang-fr">Juin</span></label>
+            <label><input type="checkbox" name="Monthly" value="july"> <span class="lang-tr visible">Temmuz</span><span class="lang-en">July</span><span class="lang-fr">Juillet</span></label>
+            <label><input type="checkbox" name="Monthly" value="august"> <span class="lang-tr visible">Ağustos</span><span class="lang-en">August</span><span class="lang-fr">Août</span></label>
+            <label><input type="checkbox" name="Monthly" value="september"> <span class="lang-tr visible">Eylül</span><span class="lang-en">September</span><span class="lang-fr">Septembre</span></label>
+            <label><input type="checkbox" name="Monthly" value="october"> <span class="lang-tr visible">Ekim</span><span class="lang-en">October</span><span class="lang-fr">Octobre</span></label>
+            <label><input type="checkbox" name="Monthly" value="november"> <span class="lang-tr visible">Kasım</span><span class="lang-en">November</span><span class="lang-fr">Novembre</span></label>
+            <label><input type="checkbox" name="Monthly" value="december"> <span class="lang-tr visible">Aralık</span><span class="lang-en">December</span><span class="lang-fr">Décembre</span></label>
+          </div>
+        </div>
+        
+        <button type="submit" class="reservation-button lang-tr visible">Rezervasyonu Onayla</button>
+        <button type="submit" class="reservation-button lang-en">Confirm Reservation</button>
+        <button type="submit" class="reservation-button lang-fr">Confirmer la Réservation</button>
+      </form>
+    </div>
+  <script>
+    function switchLanguage(lang) {
+      // Tüm dil öğelerini gizle
+      const allLangElements = document.querySelectorAll('.lang-tr, .lang-en, .lang-fr');
+      allLangElements.forEach(element => {
+        element.classList.remove('visible');
+      });
+
+      // Seçilen dili görünür yap
+      const selectedLangElements = document.querySelectorAll('.lang-' + lang);
+      selectedLangElements.forEach(element => {
+        element.classList.add('visible');
+      });
+
+      // Aktif buton stilini güncelle
+      const allLangBtns = document.querySelectorAll('.lang-btn');
+      allLangBtns.forEach(btn => btn.classList.remove('active'));
+      
+      // Hem nav hem de rezervasyon bölümündeki butonları güncelle
+      const navBtns = document.querySelectorAll('nav button');
+      const reservationBtns = document.querySelectorAll('.lang-btn');
+      
+      if (lang === 'tr') {
+        navBtns[0].style.backgroundColor = '#0072d6';
+        navBtns[1].style.backgroundColor = 'var(--primary)';
+        navBtns[2].style.backgroundColor = 'var(--primary)';
+        reservationBtns[0].classList.add('active');
+      } else if (lang === 'en') {
+        navBtns[0].style.backgroundColor = 'var(--primary)';
+        navBtns[1].style.backgroundColor = '#0072d6';
+        navBtns[2].style.backgroundColor = 'var(--primary)';
+        reservationBtns[1].classList.add('active');
+      } else if (lang === 'fr') {
+        navBtns[0].style.backgroundColor = 'var(--primary)';
+        navBtns[1].style.backgroundColor = 'var(--primary)';
+        navBtns[2].style.backgroundColor = '#0072d6';
+        reservationBtns[2].classList.add('active');
+      }
+    }
+
+    // Varsayılan olarak Türkçe seçili
+    document.addEventListener('DOMContentLoaded', function() {
+      switchLanguage('tr');
+      
+      // Rezervasyon formu gönderimi
+      const reservationForm = document.querySelector('.reservation-form');
+      if (reservationForm) {
+        reservationForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const language = document.querySelector('.lang-tr.visible') ? 'tr' : 
+                          document.querySelector('.lang-en.visible') ? 'en' : 'fr';
+          
+          if (language === 'tr') {
+            alert('Rezervasyonunuz alınmıştır! Teşekkür ederiz.');
+          } else if (language === 'en') {
+            alert('Your reservation has been received! Thank you.');
+          } else {
+            alert('Votre réservation a été reçue! Merci.');
+          }
+          
+          this.reset();
+        });
+      }
+    });
+  </script>
+</body>
+
+<footer>
+  <p class="lang-tr visible">© UR-CAR - Tüm hakları saklıdır.</p>
+  <p class="lang-en">© UR-CAR - All rights reserved.</p>
+  <p class="lang-fr">© UR-CAR - Tous droits réservés.</p>
+</footer>
+  
+</html>

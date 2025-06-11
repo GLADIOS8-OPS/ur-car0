@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UR-CAR | Ödeme Alanı</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --primary: #003366;
+      --dark: #333;
+      --light: #fff;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--light);
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--light);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .back-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #6c757d;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #5a6268;
+    }
+
+    .lang-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .lang-buttons button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .lang-buttons button:hover {
+      background-color: #0072d6;
+    }
+
+    .payment-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .order-summary, .payment-form {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .order-summary h2, .payment-form h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    .selected-plan {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .plan-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #0072d6;
+      margin-bottom: 1rem;
+    }
+
+    .plan-features {
+      list-style: none;
+    }
+
+    .plan-features li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+      color: #333;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      color: #0072d6;
+      position: absolute;
+      left: 0;
+    }
+
+    .price-breakdown {
+      border-top: 2px solid #eee;
+      padding-top: 1rem;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .total-row {
+      font-weight: bold;
+      font-size: 1.2rem;
+      border-top: 2px solid var(--primary);
+      padding-top: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: var(--dark);
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-method {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .payment-method:hover {
+      border-color: var(--primary);
+      background: #f8f9fa;
+    }
+
+    .payment-method.selected {
+      border-color: var(--primary);
+      background: #e3f2fd;
+    }
+
+    .payment-method img {
+      width: 40px;
+      height: 30px;
+      margin-bottom: 0.5rem;
+    }
+
+    .security-info {
+      background: #e8f5e8;
+      border: 1px solid #28a745;
+      border-radius: 5px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .security-info h4 {
+      color: var(--success);
+      margin-bottom: 0.5rem;
+    }
+
+    .pay-button {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--primary), #0072d6);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .pay-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .lang-tr, .lang-en, .lang-fr {
+      display: none;
+    }
+
+    .visible {
+      display: block;
+    }
+
+    .visible.inline {
+      display: inline;
+    }
+
+    .visible.flex {
+      display: flex;
+    }
+
+    .visible.grid {
+      display: grid;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .payment-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    .loading {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="lang-tr visible">UR-CAR</h1>
+    <h1 class="lang-en">UR-CAR</h1>
+    <h1 class="lang-fr">UR-CAR</h1>
+    <p class="lang-tr visible">Ödeme Sayfası</p>
+    <p class="lang-en">Payment Page</p>
+    <p class="lang-fr">Page de Paiement</p>
+  </header>
+
+  <nav>
+    <a href="#" class=>
+    </a>
+    <div class="lang-buttons">
+      <button onclick="switchLanguage('tr')">Türkçe</button>
+      <button onclick="switchLanguage('en')">English</button>
+      <button onclick="switchLanguage('fr')">Français</button>
+    </div>
+  </nav>
+
+  <div class="payment-container">
+    <!-- Sipariş Özeti -->
+    <div class="order-summary">
+      <h2 class="lang-tr visible">Sipariş Özeti</h2>
+      <h2 class="lang-en">Order Summary</h2>
+      <h2 class="lang-fr">Résumé de Commande</h2>
+      
+      <div class="selected-plan">
+      <h3 class="lang-tr visible">Standart Plan</h3>
+      <h3 class="lang-en">Standard Plan</h3>
+      <h3 class="lang-fr">Plan Standard</h3>
+
+        <div class="plan-price">
+        <span class="lang-tr visible">499₺</span>
+        <span class="lang-en">$69</span>
+        <span class="lang-fr">€69</span>
+        </div>
+        
+        <ul class="plan-features">
+        <li class="lang-tr visible">Lastik, Ayna ve Ön Cam Güvencesi</li>
+        <li class="lang-tr visible">Orta Seviye Hasar Güvencesi</li>
+        <li class="lang-tr visible">Hırsızlığa Karşı Koruma</li>
+        <li class="lang-tr visible">7/24 Yol Yardımı</li>
+        <li class="lang-en">Tyre, Mirror and Windshield Protection</li>
+        <li class="lang-en">Middle Damage Protection</li>
+        <li class="lang-en">Theft Protection</li>
+        <li class="lang-en">7/24 Roadside Assistance</li>
+        <li class="lang-fr">Protection Pneu, Miroir et Pare-brise</li>
+        <li class="lang-fr">Protection Dégâts Moyens</li>
+        <li class="lang-fr">Protection contre le Vol</li>
+        <li class="lang-fr">Assistance Routière 24/7</li>
+        <li class="lang-tr visible hidden-protection">Protection</li>
+        <li class="lang-en hidden-protection">Protection</li>
+        <li class="lang-fr hidden-protection">Protection</li>
+      </ul>
+      </div>
+      
+      <div class="price-breakdown">
+        <div class="price-row">
+          <span class="lang-tr visible">Plan Ücreti:</span>
+          <span class="lang-tr visible">₺499.00</span>
+          <span class="lang-en">Plan Fee:</span>
+          <span class="lang-en">$69.00</span>
+          <span class="lang-fr">Frais de Plan:</span>
+          <span class="lang-fr">€69.00</span>
+        </div>
+        <div class="price-row">
+          <span class="lang-tr visible">KDV (%20):</span>
+          <span class="lang-tr visible">₺82.80</span>
+          <span class="lang-en">Tax (20%):</span>
+          <span class="lang-en">$13.80</span>
+          <span class="lang-fr">TVA (20%):</span>
+          <span class="lang-fr">€13.00</span>
+        </div>
+        <div class="price-row total-row">
+          <span class="lang-tr visible">Toplam:</span>
+          <span class="lang-tr visible">₺581.80</span>
+          <span class="lang-en">Total:</span>
+          <span class="lang-en">$82.80</span>
+          <span class="lang-fr">Total:</span>
+          <span class="lang-fr">€82.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ödeme Formu -->
+    <div class="payment-form">
+      <h2 class="lang-tr visible">Ödeme Bilgileri</h2>
+      <h2 class="lang-en">Payment Information</h2>
+      <h2 class="lang-fr">Informations de Paiement</h2>
+      
+      <form id="paymentForm">
+        <!-- Kişisel Bilgiler -->
+        <div class="form-group">
+          <p class="lang-tr visible">Ad Soyad *</p>
+          <p class="lang-en">Full Name *</p>
+          <p class="lang-fr">Nom Complet *</p>
+          <input type="text" id="fullName" required>
+        </div>
+        
+        <div class="form-group">
+          <p class="lang-tr visible">E-posta *</p>
+          <p class="lang-en">Email *</p>
+          <p class="lang-fr">E-mail *</p>
+          <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+          <p class="lang-tr visible">Telefon *</p>
+          <p class="lang-en">Phone *</p>
+          <p class="lang-fr">Téléphone *</p>
+          <input type="tel" id="phone" required>
+        </div>
+
+        <!-- Ödeme Yöntemi -->
+        <div class="form-group">
+          <p class="lang-tr visible">Ödeme Yöntemi</p>
+          <p class="lang-en">Payment Method</p>
+          <p class="lang-fr">Méthode de Paiement</p>
+          <div class="payment-methods">
+            <div class="payment-method selected" onclick="selectPaymentMethod(this, 'credit')">
+              <div style="font-size: 24px;">💳</div>
+              <div class="lang-tr visible">Kredi Kartı</div>
+              <div class="lang-en">Credit Card</div>
+              <div class="lang-fr">Carte de Crédit</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod(this, 'debit')">
+              <div style="font-size: 24px;">💰</div>
+              <div class="lang-tr visible">Banka Kartı</div>
+              <div class="lang-en">Debit Card</div>
+              <div class="lang-fr">Carte Bancaire</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod(this, 'paypal')">
+              <div style="font-size: 24px;">🅿️</div>
+              <div class="lang-tr visible">PayPal</div>
+              <div class="lang-en">PayPal</div>
+              <div class="lang-fr">PayPal</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kart Bilgileri -->
+        <div id="cardInfo">
+          <div class="form-group">
+            <p class="lang-tr visible">Kart Numarası *</p>
+            <p class="lang-en">Card Number *</p>
+            <p class="lang-fr">Numéro de Carte *</p>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <p class="lang-tr visible">Son Kullanma *</p>
+              <p class="lang-en">Expiry Date *</p>
+              <p class="lang-fr">Date d'Expiration *</p>
+              <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label>CVV *</label>
+              <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <p class="lang-tr visible">Kart Üzerindeki İsim *</p>
+            <p class="lang-en">Name on Card *</p>
+            <p class="lang-fr">Nom sur la Carte *</p>
+            <input type="text" id="cardName" required>
+          </div>
+        </div>
+
+        <!-- Güvenlik Bilgisi -->
+        <div class="security-info">
+          <h4 class="lang-tr visible">🔒 Güvenli Ödeme</h4>
+          <h4 class="lang-en">🔒 Secure Payment</h4>
+          <h4 class="lang-fr">🔒 Paiement Sécurisé</h4>
+          <p class="lang-tr visible">Tüm ödeme bilgileriniz SSL sertifikası ile şifrelenmektedir.</p>
+          <p class="lang-en">All payment information is encrypted with SSL certificate.</p>
+          <p class="lang-fr">Toutes les informations de paiement sont cryptées avec certificat SSL.</p>
+        </div>
+
+        <!-- Ödeme Butonu -->
+        <button type="submit" class="pay-button">
+          <span class="lang-tr visible">₺581.80 Öde</span>
+          <span class="lang-en">Pay $82.00</span>
+          <span class="lang-fr">Payer €82.00</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div class="loading" id="loadingScreen">
+    <div class="spinner"></div>
+    <p class="lang-tr visible">Ödemeniz işleniyor...</p>
+    <p class="lang-en">Processing your payment...</p>
+    <p class="lang-fr">Traitement de votre paiement...</p>
+  </div>
+
+  <footer>
+    <p class="lang-tr visible">© UR-CAR - Tüm hakları saklıdır.</p>
+    <p class="lang-en">© UR-CAR - All rights reserved.</p>
+    <p class="lang-fr">© UR-CAR - Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    let selectedPaymentMethod = 'credit';
+
+    function switchLanguage(lang) {
+      const tr = document.querySelectorAll('.lang-tr');
+      const en = document.querySelectorAll('.lang-en');
+      const fr = document.querySelectorAll('.lang-fr');
+
+      // Tüm dilleri gizle
+      [tr, en, fr].forEach(elements => {
+        elements.forEach(el => {
+          el.classList.remove('visible', 'flex', 'grid', 'inline');
+        });
+      });
+
+      
+      let selectedElements;
+      if (lang === 'tr') {
+        selectedElements = tr;
+      } else if (lang === 'en') {
+        selectedElements = en;
+      } else if (lang === 'fr') {
+        selectedElements = fr;
+      }
+
+      selectedElements.forEach(el => {
+        el.classList.add('visible');
+        const computedStyle = window.getComputedStyle(el);
+        if (computedStyle.display === 'flex') el.classList.add('flex');
+        if (computedStyle.display === 'grid') el.classList.add('grid');
+        if (computedStyle.display === 'inline') el.classList.add('inline');
+      });
+    }
+
+    function selectPaymentMethod(element, method) {
+      document.querySelectorAll('.payment-method').forEach(el => {
+        el.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      selectedPaymentMethod = method;
+
+      const cardInfo = document.getElementById('cardInfo');
+      if (method === 'paypal') {
+        cardInfo.style.display = 'none';
+      } else {
+        cardInfo.style.display = 'block';
+      }
+    }
+
+   
+    document.getElementById('cardNumber').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+      let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+      this.value = formattedValue;
+    });
+
+   
+    document.getElementById('expiry').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+      }
+      this.value = value;
+    });
+
+    // CVV sadece rakam
+    document.getElementById('cvv').addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    // Form gönderimi
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Loading ekranını göster
+      document.getElementById('loadingScreen').style.display = 'block';
+      
+      // 3 saniye sonra başarı mesajı
+      setTimeout(function() {
+        document.getElementById('loadingScreen').style.display = 'none';
+        
+        let message;
+        if (document.querySelector('.lang-tr.visible')) {
+          message = 'Ödemeniz başarıyla tamamlandı! Sigorta poliçeniz e-posta adresinize gönderilecektir.';
+        } else if (document.querySelector('.lang-en.visible')) {
+          message = 'Payment completed successfully! Your insurance policy will be sent to your email address.';
+        } else {
+          message = 'Paiement effectué avec succès! Votre police d\'assurance sera envoyée à votre adresse e-mail.';
+        }
+        
+        alert(message);
+        
+        // Ana sayfaya yönlendirme simülasyonu
+        // window.location.href = 'index.html';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
